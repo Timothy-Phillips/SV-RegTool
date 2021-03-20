@@ -6,6 +6,18 @@
 import tkinter
 from tkinter import filedialog
 
+# Method for opening file explorer
+def explorer():
+    filename = filedialog.askopenfilename(initialdir = "/",
+                                          title = "Select a File",
+                                          filetypes = (("CSV Files",
+                                                        "*.csv*"), ))
+    # Change label contents
+    if filename:
+        explorer_label.configure(text="CSV File Selected:\n"+filename)
+    else:
+        explorer_label.configure(text="CSV File Selected:\nNone")
+
 # Create window for UI
 window = tkinter.Tk()
 window.title('File Explorer')
@@ -20,9 +32,8 @@ explorer_label = tkinter.Label(window,
                             width = 100, height = 4,
                             fg = "blue")
 
-# TODO: Create browse command
 explorer_button = tkinter.Button(window,
-                        text = "Browse Files")
+                        text = "Browse Files", command = explorer)
 
 # Layout UI Elements
 padding_label.grid(column = 1, row = 1)
