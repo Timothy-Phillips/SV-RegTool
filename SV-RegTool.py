@@ -1,10 +1,11 @@
 # SV-RegTool
-# This simple program allows users to select a single variable dataset (.csv)
-# and have it and an adjustable regression model displayed. It will also allow
-# users to query the model for predictions once the model is prepared.
+# This python file is the primary controller for SV-RegTool
 
+import Regression as reg
 import tkinter
 from tkinter import filedialog
+
+file_found_flag = False
 
 # Method for opening file explorer
 def explorer():
@@ -15,8 +16,10 @@ def explorer():
     # Change label contents
     if filename:
         explorer_label.configure(text="CSV File Selected:\n"+filename)
+        file_found_flag = True
     else:
         explorer_label.configure(text="CSV File Selected:\nNone")
+        file_found_flag = False
 
 # Create window for UI
 window = tkinter.Tk()
@@ -39,6 +42,8 @@ explorer_button = tkinter.Button(window,
 padding_label.grid(column = 1, row = 1)
 explorer_label.grid(column = 1, row = 2)
 explorer_button.grid(column = 1, row = 3, pady = 10)
+if file_found_flag:
+    print("This is when the Data is processed and Displayed")
 
 # Let the window wait for any events
 window.mainloop()
